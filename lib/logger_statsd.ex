@@ -15,7 +15,7 @@ defmodule LoggerStatsd do
       strategy: :one_for_one,
       max_restarts: 1_000_000,
       max_seconds: 1,
-      name: Messenger.Supervisor
+      name: LoggerStatsd
     ]
     Supervisor.start_link(children, opts)
   end

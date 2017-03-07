@@ -9,8 +9,8 @@ defmodule LoggerStatsd.Buffer do
     hostname = get_hostname()
     if length(counter_list) != 0 do
       Enum.each(counter_list, fn({counter, val}) ->
-        key = get_key(val, hostname)
-        ExStatsD.counter(key, counter)
+        counter_name = get_key(counter, hostname)
+        ExStatsD.counter(val, counter_name)
       end)
     end
     :ok
@@ -18,7 +18,7 @@ defmodule LoggerStatsd.Buffer do
 
   @spec get_key(String.t, String.t) :: String.t
   defp get_key(val, hostname) do
-    "loggerstatsd.#{hostname}.#{val}"
+    "#{hostname}.loggerstatsd.#{val}"
   end
 
   @spec get_hostname :: String.t
