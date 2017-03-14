@@ -6,13 +6,17 @@ defmodule LoggerStatsdLogger do
 
   @spec init(map) :: map
   def init({__MODULE__, name}) do
-    {:ok, %{name: name, level: :error}}
+    {:ok, configure(name, [])}
   end
 
   @spec handle_call(any, map) :: map
   def handle_call({:configure, [level: level]}, state) do
-    state = Map.put(state, :level, level)
+    state = configure(state.name, [level: level])
     {:ok, :ok, state}
+  end
+
+  def handle_event({_level, gl, _event}, state) when node(gl) != node() do
+    {:ok, state}
   end
 
   @spec handle_event(any, map) :: map
@@ -21,5 +25,12 @@ defmodule LoggerStatsdLogger do
       LoggerStatsd.Buffer.incr(level)
     end
     {:ok, state}
+  end
+
+  defp configure(name, opts) do
+    env = Application.get_env(:logger, name, [])
+    opts = Keyword.merge(env, opts)
+    level = Keyword.get(opts, :level, :error)
+    %{name: name, level: level}
   end
 end
