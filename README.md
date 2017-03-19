@@ -12,7 +12,7 @@ by adding `logger_statsd` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:logger_statsd, "~> 0.1.3"}]
+  [{:logger_statsd, "~> 0.1.4"}]
 end
 ```
 
