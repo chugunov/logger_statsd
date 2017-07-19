@@ -6,10 +6,11 @@ defmodule LoggerStatsd do
   """
   use Application
   require Logger
+  alias LoggerStatsd.Buffer
   @spec start(Application.start_type, start_args :: term) :: Supervisor.on_start
   def start(_type, _args) do
     children = [
-      LoggerStatsd.Buffer.worker
+      Buffer.worker
     ]
     opts = [
       strategy: :one_for_one,

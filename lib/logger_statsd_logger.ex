@@ -3,6 +3,7 @@ defmodule LoggerStatsdLogger do
   The genevent logger
   """
   use GenEvent
+  alias LoggerStatsd.Buffer
 
   @spec init(map) :: map
   def init({__MODULE__, name}) do
@@ -22,7 +23,7 @@ defmodule LoggerStatsdLogger do
   @spec handle_event(any, map) :: map
   def handle_event({level, _gl, {Logger, _, _, _}}, %{level: min_level} = state) do
     if (is_nil(min_level) or Logger.compare_levels(level, min_level) != :lt) do
-      LoggerStatsd.Buffer.incr(level)
+      Buffer.incr(level)
     end
     {:ok, state}
   end
