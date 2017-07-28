@@ -1,6 +1,6 @@
 # LoggerStatsd
 
-[![Build Status](https://travis-ci.org/steffenix/logger_statsd.svg?branch=master)](https://travis-ci.org/steffenix/logger_statsd)
+[![Build Status](https://travis-ci.org/tongdao/logger_statsd.svg?branch=master)](https://travis-ci.org/tongdao/logger_statsd)
 [![Hex.pm](https://img.shields.io/hexpm/v/logger_statsd.svg?style=flat-square)](https://hex.pm/packages/logger_statsd)
 
 LoggerJsonFileBackend is elixir `logger` backend that count the errors/warns... and send it to statsd

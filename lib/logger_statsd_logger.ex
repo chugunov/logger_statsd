@@ -2,7 +2,7 @@ defmodule LoggerStatsdLogger do
   @moduledoc """
   The genevent logger
   """
-  use GenEvent
+  @behaviour :gen_event
   alias LoggerStatsd.Buffer
 
   @spec init(map) :: map
