@@ -27,6 +27,14 @@ defmodule LoggerStatsdLogger do
     end
     {:ok, state}
   end
+  
+  def handle_info({:DOWN, ref, _, pid, reason}, %{ref: ref}) do
+    raise "device #{inspect pid} exited: " <> Exception.format_exit(reason)
+  end
+
+  def handle_info(_, state) do
+    {:ok, state}
+  end
 
   defp configure(name, opts) do
     env = Application.get_env(:logger, name, [])
